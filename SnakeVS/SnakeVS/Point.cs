@@ -46,12 +46,12 @@ namespace SnakeVS
 
             else if ( direction == Direction.DOWN)
             {
-                y = y - offset;
+                y = y + offset;
             }
 
             else
             {
-                y = y + offset;
+                y = y - offset;
             }
 
         }
