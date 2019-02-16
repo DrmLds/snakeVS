@@ -4,29 +4,28 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SnakeVS
+namespace Snake
 {
     class FoodCreator
     {
-        int mapWight;
+        int mapWidht;
         int mapHeight;
         char sym;
 
         Random random = new Random();
 
-        public FoodCreator(int mapWight, int mapHeight, char sym)
+        public FoodCreator(int mapWidth, int mapHeight, char sym)
         {
-            this.mapWight = mapWight;
+            this.mapWidht = mapWidth;
             this.mapHeight = mapHeight;
             this.sym = sym;
         }
 
-            public Point CreateFood()
+        public Point CreateFood()
         {
-            int x = random.Next(2, mapWight - 2);
+            int x = random.Next(2, mapWidht - 2);
             int y = random.Next(2, mapHeight - 2);
             return new Point(x, y, sym);
         }
-
     }
 }

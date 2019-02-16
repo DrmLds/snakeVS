@@ -3,40 +3,32 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
-namespace SnakeVS
+namespace Snake
 {
     class Program
     {
         static void Main(string[] args)
         {
-            Console.SetBufferSize(188, 125);
+                        Walls walls = new Walls(80, 25);
+            walls.Draw();
 
-            // отрисовка рамки
-            HorizontalLine upline = new HorizontalLine(0, 118, 0, '+');
-            HorizontalLine downline = new HorizontalLine(0, 118, 27, '+');
-            VerticalLine leftlne = new VerticalLine(0, 0, 27, '+');
-            VerticalLine rightlne = new VerticalLine(118, 0, 27, '+');
-            leftlne.Drow();
-            rightlne.Drow();
-            upline.Drow();
-            downline.Drow();
+            // Отрисовка точек			
+            Point p = new Point(4, 5, '*');
+            Snake snake = new Snake(p, 4, Direction.RIGHT);
+            snake.Draw();
 
-            // отрисовка точек
-            Point p = new Point(4,13, '*');
-            Snake snake = new Snake(p, 10, Direction.RIGHT);
-            snake.Drow();
-
-            // еда змейки
-            FoodCreator foodCreator = new FoodCreator(100, 25, '*');
+            FoodCreator foodCreator = new FoodCreator(80, 25, '*');
             Point food = foodCreator.CreateFood();
             food.Draw();
 
-            // поедание еды змейки
             while (true)
             {
-                if(snake.Eat (food))
+                if (walls.IsHit(snake) || snake.IsHitTail())
+                {
+                    break;
+                }
+                if (snake.Eat(food))
                 {
                     food = foodCreator.CreateFood();
                     food.Draw();
@@ -45,19 +37,15 @@ namespace SnakeVS
                 {
                     snake.Move();
                 }
-                
+
+                Thread.Sleep(100);
                 if (Console.KeyAvailable)
                 {
                     ConsoleKeyInfo key = Console.ReadKey();
                     snake.HandleKey(key.Key);
                 }
-                Thread.Sleep(100);
-                snake.Move();
-                
             }
-    
-            
         }
-        
+
     }
 }

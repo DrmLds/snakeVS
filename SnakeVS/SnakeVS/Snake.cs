@@ -4,22 +4,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SnakeVS
+namespace Snake
 {
-    class Snake : Figura
+    class Snake : Figure
     {
+        Direction direction;
 
-         Direction direction;
-
-         public Snake (Point tail, int lenght, Direction direction)
+        public Snake(Point tail, int length, Direction _direction)
         {
+            direction = _direction;
             pList = new List<Point>();
-            for(int i = 0; i< lenght; i++)
+            for (int i = 0; i < length; i++)
             {
                 Point p = new Point(tail);
                 p.Move(i, direction);
-                pList.Add( p );
-
+                pList.Add(p);
             }
         }
 
@@ -41,20 +40,31 @@ namespace SnakeVS
             nextPoint.Move(1, direction);
             return nextPoint;
         }
-        
-        public void HandleKey (ConsoleKey key)
+
+        internal bool IsHitTail()
+        {
+            var head = pList.Last();
+            for (int i = 0; i < pList.Count - 2; i++)
+            {
+                if (head.IsHit(pList[i]))
+                    return true;
+            }
+            return false;
+        }
+
+        public void HandleKey(ConsoleKey key)
         {
             if (key == ConsoleKey.LeftArrow)
                 direction = Direction.LEFT;
             else if (key == ConsoleKey.RightArrow)
                 direction = Direction.RIGHT;
-            if (key == ConsoleKey.DownArrow)
+            else if (key == ConsoleKey.DownArrow)
                 direction = Direction.DOWN;
-            if (key == ConsoleKey.UpArrow)
+            else if (key == ConsoleKey.UpArrow)
                 direction = Direction.UP;
         }
-            
-        internal bool Eat ( Point food)
+
+        internal bool Eat(Point food)
         {
             Point head = GetNextPoint();
             if (head.IsHit(food))
