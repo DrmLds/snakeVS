@@ -17,23 +17,16 @@ namespace SnakeVS
             Point p2 = new Point(3,5, '@');
             p2.Draw();
 
-           
+            HorizontalLine  line = new HorizontalLine(5, 10, 8, '+');
+            line.Drow();
 
-            var numList = new List<int>();
-            numList.Add(0);
-            numList.Add(1);
-            numList.Add(2);
+            VerticalLine line2 = new VerticalLine(10, 8, 14, '+');
+            line2.Drow();
 
-            foreach( int i in numList)
-            {
-                Console.WriteLine(i);
-            }
 
-            numList.RemoveAt(0);
+                                           
 
-            List<Point> pList = new List<Point>();
-            pList.Add(p1);
-            pList.Add(p2);
+
 
             Console.ReadLine();
 
