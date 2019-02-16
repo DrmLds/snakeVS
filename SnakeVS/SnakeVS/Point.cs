@@ -56,6 +56,11 @@ namespace SnakeVS
 
         }
 
+        public bool IsHit(Point p)
+        {
+            return p.x == this.x && p.y == this.y;
+        }
+
         static void Draw(int x, int y, char sym)
         {
             Console.SetCursorPosition(x, y);

@@ -24,14 +24,28 @@ namespace SnakeVS
             downline.Drow();
 
             // отрисовка точек
-            Point p = new Point(40,13, '*');
+            Point p = new Point(4,13, '*');
             Snake snake = new Snake(p, 10, Direction.RIGHT);
             snake.Drow();
 
+            // еда змейки
+            FoodCreator foodCreator = new FoodCreator(100, 25, '*');
+            Point food = foodCreator.CreateFood();
+            food.Draw();
 
-            // управление змейкой
+            // поедание еды змейки
             while (true)
             {
+                if(snake.Eat (food))
+                {
+                    food = foodCreator.CreateFood();
+                    food.Draw();
+                }
+                else
+                {
+                    snake.Move();
+                }
+                
                 if (Console.KeyAvailable)
                 {
                     ConsoleKeyInfo key = Console.ReadKey();
