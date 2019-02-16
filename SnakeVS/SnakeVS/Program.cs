@@ -10,24 +10,24 @@ namespace SnakeVS
     {
         static void Main(string[] args)
         {
+            Console.SetBufferSize(188, 125);
+
+            HorizontalLine upline = new HorizontalLine(0, 118, 0, '+');
+            HorizontalLine downline = new HorizontalLine(0, 118, 27, '+');
+            VerticalLine leftlne = new VerticalLine(0, 0, 27, '+');
+            VerticalLine rightlne = new VerticalLine(118, 0, 27, '+');
+            leftlne.Drow();
+            rightlne.Drow();
+            upline.Drow();
+            downline.Drow();
+
+
             Point p1 = new Point(1,5, '*');
             p1.Draw();
-
-           
+                       
             Point p2 = new Point(3,5, '@');
             p2.Draw();
-
-            HorizontalLine  line = new HorizontalLine(5, 10, 8, '+');
-            line.Drow();
-
-            VerticalLine line2 = new VerticalLine(10, 8, 14, '+');
-            line2.Drow();
-
-
-                                           
-
-
-
+                                                       
             Console.ReadLine();
 
         }
